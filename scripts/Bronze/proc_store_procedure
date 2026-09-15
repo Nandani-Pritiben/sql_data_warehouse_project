@@ -1,4 +1,21 @@
- CREATE OR ALTER PROCEDURE Bronze.load_data AS
+ /*
+===============================================================================
+Stored Procedure: Bronze.load_data
+===============================================================================
+Description:
+    This procedure manages the orchestration of data ingestion for the 
+    Bronze (Staging) layer of the Data Warehouse. It truncates existing records
+    and uses high-performance BULK INSERT commands to extract raw data 
+    from flat CSV files (CRM and ERP sources) into local SQL Server tables.
+
+Execution Details:
+    - Implements structural runtime logging using execution timestamps.
+    - Captures file-specific and total processing durations in seconds.
+    - Includes robust TRY...CATCH blocks to handle runtime extraction failures.
+===============================================================================
+*/
+
+CREATE OR ALTER PROCEDURE Bronze.load_data AS
 BEGIN
     SET NOCOUNT ON; -- Prevents internal 'rows affected' messages from cluttering the output
 
@@ -169,3 +186,4 @@ BEGIN
         PRINT '==================================================';
     END CATCH;
 END;
+GO
